@@ -6,7 +6,8 @@ import styles from './logo.module.scss'
 
 const Logo: FC = () => (
   <Link href="/" className={styles.root} aria-label="home">
-    <LigaLogoIcon />
+    {/* <LigaLogoIcon /> */}
+    LOGO
   </Link>
 )
 

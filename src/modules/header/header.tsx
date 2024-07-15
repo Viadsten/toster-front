@@ -13,7 +13,6 @@ const Header: FC<HeaderProps> = ({ className }) => {
     <header className={headerClassName}>
       <Wrapper className={styles.wrapper}>
         <Logo />
-        <strong>v {config.version}</strong>
       </Wrapper>
     </header>
   )

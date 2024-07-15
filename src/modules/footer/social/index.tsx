@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
 import styles from './social.module.scss'
-import { FooterSocialProps } from './social.types'
+import { FooterSocialProps, ISocialItem } from './social.types'
 
-const Social: FC<FooterSocialProps> = ({ items }) => (
+const Social: FC<{items: ISocialItem[]}> = ({ items }) => (
   <ul className={styles.root}>
     {items.map(({ href, icon, label }) => (
       <li className={styles.item} key={label}>

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import { Heading, Wrapper } from '@/ui'
+import { Button, Heading, Wrapper } from '@/ui'
 import classNames from 'classnames'
 
 import styles from './home.module.scss'
@@ -15,14 +15,8 @@ const Home: FC<HomeProps> = ({ className }) => {
         <Heading tagName="h1" className={styles.title}>
           Next.js template
         </Heading>
-        <Image
-          src="/images/sticker-dino.png"
-          width={512}
-          height={492}
-          quality={85}
-          alt="Ligazavr"
-          className={styles.image}
-        />
+        <Button as='a' href='/sign-in'>Sign in</Button>
+        <Button as='a' href='/sign-up'>Sign up</Button>
       </Wrapper>
     </main>
   )
