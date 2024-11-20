@@ -43,10 +43,13 @@ const SignInComponent: FC<SignInProps> = ({
     ).catch((error) => toast.error(error))
   }
   
+  // figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T
   // fetch('http://localhost:7777/users/1').then((response) => response.json()).then((e) => console.log(e))
   // fetch('https://api.figma.com/v1/files/IXVsc0mGkbKRHkHwwZTCgG').then((response) => console.log(response.json()))
 
 
+  // const figmaToken = 'figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T';
+  // const fileId = 'IXVsc0mGkbKRHkHwwZTCgG';  // Укажите здесь ID файла
 
   // fetch(`https://api.figma.com/v1/files/${fileId}`, {
   //   method: 'GET',
