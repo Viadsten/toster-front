@@ -25,13 +25,12 @@ const getFileIdFromFigmaUrl = (url: string): string | null => {
     return null
   }
 }
-const FIGMA_TOKEN = 'figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T';
 
 const getFigmaFile = (id: string): Promise<AxiosResponse<any, any>> => {
   return axios.get(`https://api.figma.com/v1/files/${id}`, {
     method: 'GET',
     headers: {
-      'X-Figma-Token': FIGMA_TOKEN,
+      'X-Figma-Token': 'FIGMA_TOKEN',
       'Content-Type': 'application/json'
     }
   })
@@ -63,8 +62,6 @@ const FigmaCreateCard: FC<FigmaCreateCardProps> = ({
     iframeRef?.current?.contentWindow?.postMessage(message, "*");
   }
 
-  // const figmaToken = 'figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T';
-  // const fileId = 'IXVsc0mGkbKRHkHwwZTCgG';  // Укажите здесь ID файла
 
 
   // fetch(`https://api.figma.com/v1/files/${fileId}`, {
