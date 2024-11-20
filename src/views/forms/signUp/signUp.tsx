@@ -11,14 +11,8 @@ import Social from '@/modules/footer/social'
 import { ISocialItem } from '@/modules/footer/social/social.types'
 import IconGithub from '@/shared/assets/icons/github-mark.svg'
 import { SubmitHandler, useForm } from 'react-hook-form'
-
-const socialList: ISocialItem[] = [
-  {
-    label: 'github repo',
-    href: 'https://github.com/htmlonelove/liga-nextjs-template',
-    icon: <IconGithub />
-  }
-]
+import { signUpAction } from '@/shared/api/user'
+import { toast } from 'react-toastify'
 
 const SignUpComponent: FC<SignUpProps> = ({
   className
@@ -31,19 +25,26 @@ const SignUpComponent: FC<SignUpProps> = ({
     },
     mode: "onChange",
   })
-  const onSubmit: SubmitHandler<any> = (date) => console.log(date)
+
+  const onSubmit: SubmitHandler<any> = (data: {email: string, password: string}) => {
+    signUpAction(data).then(
+      (response) => {
+        toast.success(response.statusText)
+      }
+    ).catch((error) => toast.error(error))
+  }
 
   return (
     <main className={rootClassName} onSubmit={handleSubmit(onSubmit)}>
       <Wrapper>
         <form>
-          <Input 
+          {/* <Input 
             name='Name'
             placeholder="Имя"
             type='text'
             control={control}
             rules={{ required: true }} 
-          />
+          /> */}
           <Input 
             control={control}
             name="email" 
@@ -64,21 +65,20 @@ const SignUpComponent: FC<SignUpProps> = ({
             rules={{ required: true }} 
             placeholder='Пароль'
           />
-          <Input
+          {/* <Input
             name='rules'
             placeholder='На обработку данных'
             label="На обработку данных"
             type='checkbox'
             control={control}
             rules={{required: true}}
-          />
+          /> */}
           <Button type='submit'>Отправить</Button>
           <Button 
             as='a'
             isRouteLink={true}
             href='/sign-in'
           >Авторизоваться</Button>        
-          <Social items={socialList} />
 
         </form>
       </Wrapper>

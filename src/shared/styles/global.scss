@@ -7,14 +7,16 @@
   --color-transparent: rgba(255 255 255 / 0%);
 
   // project colors
-  --color-blue: #2c39f2;
-  --color-blue-border: #dadcfa;
+  --color-blue: #5c7c6b;
+  --color-blue-border: #fadaf1;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html {

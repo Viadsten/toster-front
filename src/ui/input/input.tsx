@@ -1,6 +1,7 @@
+'use client'
+
 import { FC, InputHTMLAttributes } from 'react'
 import classNames from 'classnames'
-
 import styles from './input.module.scss'
 import { useController, UseControllerProps, UseFormRegister } from 'react-hook-form'
 

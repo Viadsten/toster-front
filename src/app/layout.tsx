@@ -3,9 +3,11 @@ import { Footer } from '@modules/footer'
 import { Header } from '@modules/header'
 
 import '@styles/global.scss'
+import 'react-toastify/dist/ReactToastify.css';
 
 import localFont from 'next/font/local'
 import { Provider } from '@service/provider'
+import { ToastContainer } from 'react-toastify';
 
 const font = localFont({
   src: [
@@ -39,7 +41,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={font.className}>
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        </meta>
+      </head>
+      <body>
         <Provider>
           <div id="root">
             <Header />
@@ -49,6 +55,7 @@ export default function RootLayout({
 
           <div id="modal-root" />
         </Provider>
+        <ToastContainer />
       </body>
     </html>
   )

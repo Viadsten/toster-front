@@ -51,7 +51,7 @@
 
 @mixin h1 {
   font-weight: 400;
-  font-size: rem(96);
+  font-size: rem(80);
   line-height: 1.04;
 
   @include tablet-small {
@@ -61,7 +61,7 @@
 
 @mixin h2 {
   font-weight: 400;
-  font-size: rem(80);
+  font-size: rem(50);
   line-height: 0.9;
 
   @include tablet-small {

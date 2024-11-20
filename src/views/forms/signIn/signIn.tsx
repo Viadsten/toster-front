@@ -11,6 +11,8 @@ import Social from '@/modules/footer/social'
 import { ISocialItem } from '@/modules/footer/social/social.types'
 import IconGithub from '@/shared/assets/icons/github-mark.svg'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { getUserByIdAction, getUsersAction, signInAction } from '@/shared/api/user'
+import { toast } from 'react-toastify'
 
 const socialList: ISocialItem[] = [
   {
@@ -31,8 +33,45 @@ const SignInComponent: FC<SignInProps> = ({
     },
     mode: "onChange",
   })
-  const onSubmit: SubmitHandler<any> = (date) => console.log(date)
+  const onSubmit: SubmitHandler<any> = (data: {email: string, password: string}) => {
+    console.log(data)
+    
+    signInAction(data).then(
+      (response) => {
+        toast.success(response.statusText)
+      }
+    ).catch((error) => toast.error(error))
+  }
   
+  // figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T
+  // fetch('http://localhost:7777/users/1').then((response) => response.json()).then((e) => console.log(e))
+  // fetch('https://api.figma.com/v1/files/IXVsc0mGkbKRHkHwwZTCgG').then((response) => console.log(response.json()))
+
+
+  // const figmaToken = 'figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T';
+  // const fileId = 'IXVsc0mGkbKRHkHwwZTCgG';  // Укажите здесь ID файла
+
+  // fetch(`https://api.figma.com/v1/files/${fileId}`, {
+  //   method: 'GET',
+  //   headers: {
+  //     'X-Figma-Token': figmaToken,
+  //     'Content-Type': 'application/json'
+  //   }
+  // })
+  //   .then(response => {
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(data => {
+  //     console.log(data);
+  //   })
+  //   .catch(error => {
+  //     console.error('There was a problem with the fetch operation:', error);
+  //   });
+
+
   return (
     <main className={rootClassName}>
       <Wrapper>
@@ -59,6 +98,7 @@ const SignInComponent: FC<SignInProps> = ({
             placeholder='Пароль'
           />
           <Button type='submit'>Авторизоваться</Button>
+          <Button type='button' onClick={() => {getUserByIdAction(1).then((res) => toast.success(res.data.email))}}>Получить пользователей</Button>
           <Button 
             as='a'
             isRouteLink={true}
@@ -78,3 +118,13 @@ const SignInComponent: FC<SignInProps> = ({
 }
 
 export default SignInComponent
+
+
+
+
+
+
+
+
+
+
