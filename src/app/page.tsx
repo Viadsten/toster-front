@@ -5,18 +5,17 @@ import { cookies } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Liga A Next.js template'
+  description: 'toster'
 }
 
 export default function Home() {
-  const cookie = cookies().get('session')
-
-
+  const cookie = cookies().get('token')
 
   
-  console.log(cookie)
-  // if (true) {
-  //   redirect('/sign-in')
-  // }
+  console.log('cookie', cookie)
+  if (!cookie?.value) {
+    redirect('/sign-in')
+  }
+
   return <HomeView />
 }

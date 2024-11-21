@@ -17,9 +17,13 @@ export function signInAction(userData: {email: string, password: string}) {
 }
 
 export function getUserByIdAction(id: number) {
-  return axiosInstance.post<IUser>(`users/${id}`)
+  return axiosInstance.get<IUser>(`users/${id}`)
 }
 
 export function getUsersAction() {
-  return axiosInstance.post<IUser>(`users`)
+  return axiosInstance.get<IUser>(`users`)
+}
+
+export function getCurrentUserAction() {
+  return axiosInstance.get<IUser>(`currentUser`)
 }

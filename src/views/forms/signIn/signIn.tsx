@@ -9,17 +9,11 @@ import { Button, Input, Typography, Wrapper } from '@/ui'
 import Link from 'next/link'
 import Social from '@/modules/footer/social'
 import { ISocialItem } from '@/modules/footer/social/social.types'
-import IconGithub from '@/shared/assets/icons/github-mark.svg'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { getUserByIdAction, getUsersAction, signInAction } from '@/shared/api/user'
+import { getCurrentUserAction, getUserByIdAction, getUsersAction, signInAction } from '@/shared/api/user'
 import { toast } from 'react-toastify'
 
 const socialList: ISocialItem[] = [
-  {
-    label: 'github repo',
-    href: 'https://github.com/htmlonelove/liga-nextjs-template',
-    icon: <IconGithub />
-  }
 ]
 
 const SignInComponent: FC<SignInProps> = ({
@@ -98,7 +92,10 @@ const SignInComponent: FC<SignInProps> = ({
             placeholder='Пароль'
           />
           <Button type='submit'>Авторизоваться</Button>
-          <Button type='button' onClick={() => {getUserByIdAction(1).then((res) => toast.success(res.data.email))}}>Получить пользователей</Button>
+          <Button type='button' 
+            onClick={
+              () => {getCurrentUserAction().then((res) => toast.success(res.data.email))}}
+            >Получить пользователей</Button>
           <Button 
             as='a'
             isRouteLink={true}

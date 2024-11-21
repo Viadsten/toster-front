@@ -1,4 +1,3 @@
-[![Liga A](./public/images/banner.jpg)](https://ligaa.agency/)
 
 # Гайд по работе
 
