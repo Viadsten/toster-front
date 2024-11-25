@@ -8,34 +8,36 @@ import styles from './header.module.scss'
 import { HeaderProps } from './header.types'
 import Logo from './logo'
 import { Router } from 'next/router'
-import { redirect } from 'next/navigation'
-function deleteAllCookies() {
-  document.cookie.split(';').forEach(cookie => {
-      console.log(cookie)
-      const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
-  });
-}
+import { redirect, useRouter } from 'next/navigation'
+import { logoutAction } from '@/shared/api/user'
+import { useDispatch, useSelector } from 'react-redux'
+import { getModelFromLocalStorage, userActions } from '@/shared/store/user/user.slice'
+import { AppDispatch } from '@/shared/store'
+import { useAppDispatch, useAppSelector } from '@/shared/store/hooks'
+
 const Header: FC<HeaderProps> = ({ className }) => {
-  //@ts-ignore
-  cookieStore.getAll().then(cookies => console.log(cookies))
+  const dispatch = useAppDispatch()
+
+  // const user = useAppSelector((state) => state.user.currentUser)
+  const token = getModelFromLocalStorage('token')
+
   const signOut = () => {
-    
-    // deleteAllCookies()
-    redirect(`/sign-in`) 
+    dispatch(userActions.logout())
   }
 
   const headerClassName = classNames(styles.root, className)
   return (
     <header className={headerClassName}>
       <Wrapper className={styles.wrapper}>
+        {/* {user && <span>Привет: {user?.token}</span>} */}
         <Logo />
-        <Button
-          onClick={() => signOut()}
-        >
-          Logout
-        </Button>
+        { token &&
+          <Button
+            onClick={() => signOut()}
+          >
+            Logout
+          </Button>
+        }
       </Wrapper>
     </header>
   )

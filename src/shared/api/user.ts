@@ -1,10 +1,11 @@
+import { useRouter } from "next/navigation"
 import { axiosInstance } from "./instances"
 
 export interface IUser {
   email: string,
   name: string,
   id: number,
-  isAccess: boolean
+  isAccess: boolean,
 }
 
 
@@ -26,4 +27,8 @@ export function getUsersAction() {
 
 export function getCurrentUserAction() {
   return axiosInstance.get<IUser>(`currentUser`)
+}
+
+export function logoutAction() {
+  return axiosInstance.post<null>(`/auth/logout`)
 }

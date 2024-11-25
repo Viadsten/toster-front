@@ -12,6 +12,9 @@ import { ISocialItem } from '@/modules/footer/social/social.types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { getCurrentUserAction, getUserByIdAction, getUsersAction, signInAction } from '@/shared/api/user'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { userActions } from '@/shared/store/user/user.slice'
+import { AppDispatch } from '@/shared/store'
 
 const socialList: ISocialItem[] = [
 ]
@@ -19,7 +22,9 @@ const socialList: ISocialItem[] = [
 const SignInComponent: FC<SignInProps> = ({
   className
 }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const rootClassName = classNames(styles.root, className)
+
   const { handleSubmit, control } = useForm<any>({
     defaultValues: {
       email: "",
@@ -28,14 +33,11 @@ const SignInComponent: FC<SignInProps> = ({
     mode: "onChange",
   })
   const onSubmit: SubmitHandler<any> = (data: {email: string, password: string}) => {
-    console.log(data)
-    
-    signInAction(data).then(
-      (response) => {
-        toast.success(response.statusText)
-      }
-    ).catch((error) => toast.error(error))
+    dispatch(userActions.login(data))
   }
+
+
+
   
   // figd__cGb61DgifH6gp3bgzL_9QXvirfiHE3QYNPw-M1T
   // fetch('http://localhost:7777/users/1').then((response) => response.json()).then((e) => console.log(e))

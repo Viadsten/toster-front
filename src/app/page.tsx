@@ -9,13 +9,6 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  const cookie = cookies().get('token')
-
-  
-  console.log('cookie', cookie)
-  if (!cookie?.value) {
-    redirect('/sign-in')
-  }
 
   return <HomeView />
 }

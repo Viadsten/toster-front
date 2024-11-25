@@ -5,8 +5,8 @@ import { DeviceSize, SCALING_BREAKPOINTS } from '@/shared/const'
 import { isDeviceAtom } from '@atoms/deviceAtom'
 import { useScaling } from '@hooks/index'
 import { Provider as JotaiProvider, useAtom } from 'jotai'
-import userAtom from '@/shared/atoms/userAtom'
-import { useRouter } from 'next/router'
+import StoreProvider from './storeProvider'
+import AuthGuardProvider from './authGuardProvider'
 
 const ScalingLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const [isDeviceDetected] = useAtom(isDeviceAtom)
@@ -23,22 +23,13 @@ const ScalingLayout: FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 
-const UserProvider: FC<{children: ReactNode}> = ({ children }) => {
-  const user = useAtom(userAtom)
-  const router = useRouter()
-
-  // if (!user) {
-  //   router.push('/')
-  // }
-  console.log(user)
-
-  return <>{children}</>
-}
-
 export const Provider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <JotaiProvider>
-      <ScalingLayout>{children}</ScalingLayout>
-    </JotaiProvider>
+    <StoreProvider>
+      <AuthGuardProvider>
+        <ScalingLayout>{children}</ScalingLayout>
+
+      </AuthGuardProvider>
+    </StoreProvider>
   )
 }

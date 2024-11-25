@@ -6,8 +6,10 @@ import '@styles/global.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
 import localFont from 'next/font/local'
-import { Provider } from '@service/provider'
 import { ToastContainer } from 'react-toastify';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { Provider } from '@/service/provider';
 
 const font = localFont({
   src: [
@@ -39,11 +41,11 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
+  
   return (
     <html lang="ru">
       <head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        </meta>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
       </head>
       <body>
         <Provider>
