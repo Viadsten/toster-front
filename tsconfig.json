@@ -1,39 +1,28 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "baseUrl": "./",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
     "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noImplicitAny": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "types": ["vite/client", "@total-typescript/ts-reset", "node"],
     "paths": {
       "@/*": ["./src/*"],
-      "@public/*": ["./public/*"],
-      "@components/*": ["./src/components/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@service/*": ["./src/service/*"],
-      "@views/*": ["./src/views/*"],
-      "@ui/*": ["./src/ui/*"],
-      "@api/*": ["./src/shared/api/*"],
-      "@atoms/*": ["./src/shared/atoms/*"],
-      "@hooks/*": ["./src/shared/hooks/*"],
-      "@styles/*": ["./src/shared/styles/*"],
-      "@types/*": ["./src/shared/types/*"],
-      "@icons/*": ["./src/shared/assets/icons/*"]
+      "@ui": ["./src/shared/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
