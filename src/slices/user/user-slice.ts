@@ -45,6 +45,7 @@ function createExtraReducers(
     const { token } = action.payload;
 
     if (token) {
+      console.log(action.payload);
       const user = { name: "Гога", email: "goga@kpyt.dick", hasAccess: true };
       localStorage.setItem("currentUser", JSON.stringify(user));
       localStorage.setItem("token", token);
@@ -56,7 +57,6 @@ function createExtraReducers(
     }
   }),
     builder.addCase(extraActions.login.rejected, (state, action) => {
-      console.log("errpor", state, action);
       state.authStatus = AuthorizationStatus.NoAuth;
       toast.error("Какая-то ошибка, не получилось вытащить");
     });
@@ -69,7 +69,20 @@ function createExtraReducers(
   });
   // register
   builder.addCase(extraActions.register.fulfilled, (state, action) => {
-    state.authStatus = AuthorizationStatus.AuthNoVerification;
+    const token = action.payload.token;
+    if (action.payload.token) {
+      state.authStatus = AuthorizationStatus.AuthNoVerification;
+      toast.success(
+        "Регистрация прошла успешно, но бек ещё не готов. Поэтому логинься сам лох",
+      );
+      // localStorage.setItem("currentUser", JSON.stringify(user));
+      // localStorage.setItem("token", token);
+      // state.currentUser = user;
+      // state.authStatus = AuthorizationStatus.Auth;
+    } else {
+      state.currentUser = null;
+      state.authStatus = AuthorizationStatus.NoAuth;
+    }
   });
   // currentUser
   builder.addCase(extraActions.currentUser.fulfilled, (state, action) => {
@@ -104,8 +117,9 @@ function createExtraActions() {
     ),
     register: createAsyncThunk(
       `/register`,
-      async () =>
-        (await axiosInstance.post<{ token: "string" }>(`/auth/register`)).data,
+      async (data: { email: string; password: string; name: string }) =>
+        (await axiosInstance.post<{ token: "string" }>(`/auth/register`, data))
+          .data,
     ),
     currentUser: createAsyncThunk(
       `/currentUser`,

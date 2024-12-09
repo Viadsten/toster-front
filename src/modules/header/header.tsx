@@ -8,8 +8,6 @@ export const Header: FC<HeaderProps> = (props) => {
   const user = useAppSelector((state) => state.USER);
   const dispatch = useAppDispatch();
 
-  console.log(user);
-
   const handleLogout = () => dispatch(userActions.logout());
 
   return (

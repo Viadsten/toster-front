@@ -6,11 +6,7 @@ import { AuthorizationStatus } from "@/shared/types/enums";
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const user = useAppSelector((state) => state.USER);
-  console.log("DISPATCH", user);
 
-  useEffect(() => {
-    console.log("DISPATCH", user);
-  }, [user]);
   // if (user.authStatus === AuthorizationStatus.NoAuth) {
   //   return <Navigate to={'sign-in'} />
   // }
@@ -22,6 +18,10 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   if (!user.currentUser) {
     return <Navigate to={"sign-in"} />;
   }
+
+  // if (!user.currentUser.hasAccess) {
+  //   return <Navigate to={"mail-verification"} />
+  // }
 
   return children ?? <Outlet />;
 };

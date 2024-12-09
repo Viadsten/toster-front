@@ -6,6 +6,7 @@ import { userActions } from "@/slices/user/user-slice";
 import { UiInput } from "@/shared/ui/UiInput";
 import { useForm } from "react-hook-form";
 import { AuthLayout } from "@/layouts/AuthLayout";
+import { UiLink } from "@/shared/ui/UiLink";
 
 export const SignIn: FC<SignInProps> = (props) => {
   const dispatch = useAppDispatch();
@@ -28,12 +29,15 @@ export const SignIn: FC<SignInProps> = (props) => {
       <div {...props}>
         <form
           onSubmit={handleSubmit(loginUser)}
-          className="mx-auto grid w-80 grid-cols-1 gap-2"
+          className="mx-auto grid w-80 grid-cols-1 gap-5"
         >
+          <h1 className="text-center">Авторизация</h1>
           <UiInput
             label="Почта"
             name="email"
             control={control}
+            variant="bordered"
+            size="sm"
             rules={{
               required: true,
               pattern: {
@@ -46,11 +50,14 @@ export const SignIn: FC<SignInProps> = (props) => {
             control={control}
             label="Пароль"
             name="password"
+            variant="bordered"
+            size="sm"
             rules={{
               required: true,
             }}
           ></UiInput>
           <UiButton type="submit">Войти</UiButton>
+          <UiLink href="/sign-up">Зарегестрироваться</UiLink>
         </form>
       </div>
     </AuthLayout>
